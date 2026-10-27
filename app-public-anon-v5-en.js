@@ -2,7 +2,7 @@
 "use strict";
 
 const DATA = window.ZW_DATA;
-const APP_VERSION = "5.0.0-en";
+const APP_VERSION = "5.0.1-en";
 const DB_NAME = "zerowaste-entry-public-anon-v5-en";
 const DB_VERSION = 1;
 const STORE_SUBMISSIONS = "submissions";
@@ -11,7 +11,7 @@ const STORE_DISHES = "userDishes";
 
 const ATTRS = [
   ["appearance", "Appearance"],
-  ["smell", "Aroma"],
+  ["smell", "Odour"],
   ["taste", "Taste"],
   ["texture", "Texture"],
   ["overall", "Overall liking"]
@@ -1808,7 +1808,7 @@ async function init() {
 
   if ("serviceWorker" in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register("./sw-public-anon-v5-en.js?v=5.0.0");
+      const registration = await navigator.serviceWorker.register("./sw-public-anon-v5-en.js?v=5.0.1");
       await registration.update();
     } catch (err) {
       console.warn("Service worker registration failed:", err);

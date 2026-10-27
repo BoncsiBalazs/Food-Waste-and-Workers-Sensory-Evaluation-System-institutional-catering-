@@ -31369,188 +31369,188 @@ window.ZW_DATA = {
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
+      "attribute": "Odour",
       "descriptor": "Appropriate",
       "polarity": "appropriate"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Aroma too weak",
+      "attribute": "Odour",
+      "descriptor": "Odour too weak",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Lacks characteristic aroma",
+      "attribute": "Odour",
+      "descriptor": "Lacks characteristic odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Aroma too intense",
+      "attribute": "Odour",
+      "descriptor": "Odour too intense",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Unpleasant aroma",
+      "attribute": "Odour",
+      "descriptor": "Unpleasant odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Uncharacteristic aroma",
+      "attribute": "Odour",
+      "descriptor": "Uncharacteristic odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Stale aroma",
+      "attribute": "Odour",
+      "descriptor": "Stale odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Musty aroma",
+      "attribute": "Odour",
+      "descriptor": "Musty odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Rancid aroma",
+      "attribute": "Odour",
+      "descriptor": "Rancid odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Burnt aroma",
+      "attribute": "Odour",
+      "descriptor": "Burnt odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Scorched aroma",
+      "attribute": "Odour",
+      "descriptor": "Scorched odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Smoky aroma",
+      "attribute": "Odour",
+      "descriptor": "Smoky odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Fermented aroma",
+      "attribute": "Odour",
+      "descriptor": "Fermented odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Slightly sour aroma",
+      "attribute": "Odour",
+      "descriptor": "Slightly sour odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Excessively sweet aroma",
+      "attribute": "Odour",
+      "descriptor": "Excessively sweet odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Metallic aroma",
+      "attribute": "Odour",
+      "descriptor": "Metallic odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Sulphurous aroma",
+      "attribute": "Odour",
+      "descriptor": "Sulphurous odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Plastic-like aroma",
+      "attribute": "Odour",
+      "descriptor": "Plastic-like odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Chemical-like aroma",
+      "attribute": "Odour",
+      "descriptor": "Chemical-like odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Excessively fatty aroma",
+      "attribute": "Odour",
+      "descriptor": "Excessively fatty odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Oily aroma",
+      "attribute": "Odour",
+      "descriptor": "Oily odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Too much onion aroma",
+      "attribute": "Odour",
+      "descriptor": "Too much onion odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Too much garlic aroma",
+      "attribute": "Odour",
+      "descriptor": "Too much garlic odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Overly spicy aroma",
+      "attribute": "Odour",
+      "descriptor": "Overly spicy odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
+      "attribute": "Odour",
       "descriptor": "Too peppery",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Too much caraway aroma",
+      "attribute": "Odour",
+      "descriptor": "Too much caraway odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Too much paprika aroma",
+      "attribute": "Odour",
+      "descriptor": "Too much paprika odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Overly meaty aroma",
+      "attribute": "Odour",
+      "descriptor": "Overly meaty odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Insufficient meat aroma",
+      "attribute": "Odour",
+      "descriptor": "Insufficient meat odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Insufficient vegetable aroma",
+      "attribute": "Odour",
+      "descriptor": "Insufficient vegetable odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Milk aroma too strong",
+      "attribute": "Odour",
+      "descriptor": "Milk odour too strong",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Egg aroma too strong",
+      "attribute": "Odour",
+      "descriptor": "Egg odour too strong",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Fish aroma too strong",
+      "attribute": "Odour",
+      "descriptor": "Fish odour too strong",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
+      "attribute": "Odour",
       "descriptor": "Refrigerator-like odour",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Aroma associated with prolonged hot holding",
+      "attribute": "Odour",
+      "descriptor": "Odour associated with prolonged hot holding",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Aroma atypical of the dish",
+      "attribute": "Odour",
+      "descriptor": "Odour atypical of the dish",
       "polarity": "negative"
     },
     {
-      "attribute": "Aroma",
-      "descriptor": "Aroma indicating loss of freshness",
+      "attribute": "Odour",
+      "descriptor": "Odour indicating loss of freshness",
       "polarity": "negative"
     },
     {
@@ -32005,7 +32005,7 @@ window.ZW_DATA = {
     },
     {
       "attribute": "Overall liking",
-      "descriptor": "Unpleasant aroma",
+      "descriptor": "Unpleasant odour",
       "polarity": "negative"
     },
     {
@@ -32015,7 +32015,7 @@ window.ZW_DATA = {
     },
     {
       "attribute": "Overall liking",
-      "descriptor": "Uncharacteristic aroma",
+      "descriptor": "Uncharacteristic odour",
       "polarity": "negative"
     },
     {

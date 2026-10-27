@@ -9,3 +9,7 @@
 **Separate English website recommended:** create a new repository (for example `zerowaste-entry-en`) so the original Hungarian GitHub Pages site remains available. Upload these files to that repository root and enable Pages. If your custom domain currently points to the Hungarian repository, the English site will have its own GitHub Pages URL until you configure a separate domain or redirect.
 
 **Important:** The English release stores entries in a separate IndexedDB database. Export any existing entries from the Hungarian site before replacing it.
+
+## Updating an existing English site to v5.0.1
+
+Replace the existing files in your repository with the contents of this ZIP (at the root, not nested under another folder). The release changes the visible sensory heading **Aroma** to **Odour** in both soup and main-course CATA screens, and updates the associated descriptor terms. The JavaScript property key `smell`, the saved-record structure and export column names remain unchanged. The IndexedDB database name is also unchanged, so existing entries remain in the same local browser store. Versioned asset URLs and the service-worker cache key have been updated; if you still see the old text after deployment, use Ctrl+Shift+R or try a private window.

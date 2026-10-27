@@ -9,19 +9,19 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
-  <link rel="stylesheet" href="./styles-public-anon-v5-en.css?v=5.0.0">
+  <link rel="stylesheet" href="./styles-public-anon-v5-en.css?v=5.0.1">
   <script>
 
     if ("caches" in window) {
       caches.keys().then(keys => Promise.all(
-        keys.filter(k => (k.startsWith("zerowaste-entry-") || k.startsWith("adatrögzítő-modul-")) && k !== "zerowaste-entry-v5-en")
+        keys.filter(k => (k.startsWith("zerowaste-entry-") || k.startsWith("adatrögzítő-modul-")) && k !== "zerowaste-entry-v5.0.1-en")
             .map(k => caches.delete(k))
       )).catch(() => {});
     }
   </script>
-  <script src="./data-public-anon-v5-en.js?v=5.0.0"></script>
+  <script src="./data-public-anon-v5-en.js?v=5.0.1"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-  <script src="./app-public-anon-v5-en.js?v=5.0.0" defer></script>
+  <script src="./app-public-anon-v5-en.js?v=5.0.1" defer></script>
 </head>
 <body>
   <div id="app">

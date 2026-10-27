@@ -1,15 +1,20 @@
-# Deploy ZeroWaste Entry in English – GitHub Pages
+# Deploy ZeroWaste Entry (English v5.0.2) to GitHub Pages
 
-1. Unzip the release. Upload **all files and the `icons` folder** to the root of the target GitHub repository. Ensure `index.html`, `app-public-anon-v5-en.js`, `data-public-anon-v5-en.js`, `styles-public-anon-v5-en.css`, `sw-public-anon-v5-en.js`, `manifest.webmanifest` and `mate_logo.png` are present.
-2. In GitHub, go to **Settings → Pages**, select **Deploy from a branch**, then the **main** branch and the **/(root)** folder. Save.
-3. Visit the Pages URL. If an existing Hungarian site is being overwritten, perform a hard refresh (Ctrl+Shift+R), or test in a private browser window. PWA caches are versioned to prevent old-language assets being reused.
-4. Check English age groups, institutions, food suggestions, CATA descriptors, both measurement steps, the review screen, saved records, the portion guide and CSV/ZIP downloads.
-5. Export a test ZIP and verify that the `entry_events.csv` data can still be imported by the ZeroWaste R pipeline. Keep one copy of the original Hungarian site until validation has succeeded.
+**This update fixes a stale-version problem.** The v5.0.1 source ZIP already contained the correct **Odour** label. If the live website still shows **Aroma**, the page is likely loading an older build or an older browser/PWA cache. v5.0.2 uses new filenames for the HTML-referenced JavaScript/CSS assets and a new service-worker cache key.
 
-**Separate English website recommended:** create a new repository (for example `zerowaste-entry-en`) so the original Hungarian GitHub Pages site remains available. Upload these files to that repository root and enable Pages. If your custom domain currently points to the Hungarian repository, the English site will have its own GitHub Pages URL until you configure a separate domain or redirect.
+1. Open the GitHub repository that actually hosts the English Pages site, go to the `main` branch and open its root (the folder with `index.html`).
+2. Unzip this release on your computer. Select **all contents of the extracted folder**, including `index.html`, the three `*v5-0-2-en*` assets, `sw-public-anon-v5-0-2-en.js`, `manifest.webmanifest`, `mate_logo.png`, and the `icons/` folder.
+3. Select **Add file → Upload files** in GitHub. Upload the extracted files and commit to `main`. **Do not upload the ZIP itself.** Ensure GitHub shows an updated `index.html` in the repository root. Old `v4` or `v5.0.1` files can remain in the repo; the new `index.html` no longer references them.
+4. Check **Settings → Pages**: deploy from `main`, root `/` (or follow the existing Pages workflow). Open the site's *Settings → Pages → Visit site* link.
+5. In the site header, verify the visible text **English v5.0.2 · demonstration version**. This is the best indicator that GitHub Pages is loading the right release.
+6. Go to **3. Soup – sensory evaluation**: the second attribute must be **Odour**. Repeat at **5. Main course – sensory evaluation**. The CATA list should show **Odour too weak**, not the old wording.
+7. If you still see the old UI, first open the site in a private/incognito window. If that is correct, refresh the ordinary browser with Ctrl+Shift+R (Windows), or in Developer Tools → Application → Service Workers choose **Unregister**, then clear this site's cache data (avoid deleting IndexedDB unless your locally saved entries have been exported). Reload the site. Do not clear IndexedDB without exporting saved records first.
+8. Test recording and ZIP/Excel/CSV exports using synthetic data. Export a sample and confirm compatibility with your existing R pipeline before replacing a production entry site.
 
-**Important:** The English release stores entries in a separate IndexedDB database. Export any existing entries from the Hungarian site before replacing it.
+## Troubleshooting
+- **Still says Aroma, and no English v5.0.2 label:** the wrong files/branch/repo are deployed, or the browser is showing an old cached page.
+- **English v5.0.2 label shows but Aroma appears:** open Developer Tools → Network and confirm `app-public-anon-v5-0-2-en.js` and `data-public-anon-v5-0-2-en.js` loaded successfully. This release has no `Aroma` string in runtime HTML/JS/data assets.
+- **The website is blank:** check that the version-specific filenames are present alongside `index.html` at repository root.
 
-## Updating an existing English site to v5.0.1
-
-Replace the existing files in your repository with the contents of this ZIP (at the root, not nested under another folder). The release changes the visible sensory heading **Aroma** to **Odour** in both soup and main-course CATA screens, and updates the associated descriptor terms. The JavaScript property key `smell`, the saved-record structure and export column names remain unchanged. The IndexedDB database name is also unchanged, so existing entries remain in the same local browser store. Versioned asset URLs and the service-worker cache key have been updated; if you still see the old text after deployment, use Ctrl+Shift+R or try a private window.
+### Technical
+The UI uses **Odour**; the technical JSON/CSV field keys retain `smell` deliberately to avoid breaking previous entries and R imports. No database schema migration is necessary.

@@ -2,7 +2,7 @@
   "name": "ZeroWaste Entry – Institutional Catering",
   "short_name": "ZeroWaste Entry",
   "description": "English-language plate-waste observation and sensory data entry for institutional catering",
-  "start_url": "./index.html?v=5.0.2",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f7faf9",
   "theme_color": "#0f766e",

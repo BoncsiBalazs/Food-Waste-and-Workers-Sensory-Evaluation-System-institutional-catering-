@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="ZeroWaste Entry – plate-waste observation form for institutional catering">
+  <title>ZeroWaste Entry – Institutional Catering</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles-public-anon-v5-en.css?v=5.0.0">
+  <script>
+
+    if ("caches" in window) {
+      caches.keys().then(keys => Promise.all(
+        keys.filter(k => (k.startsWith("zerowaste-entry-") || k.startsWith("adatrögzítő-modul-")) && k !== "zerowaste-entry-v5-en")
+            .map(k => caches.delete(k))
+      )).catch(() => {});
+    }
+  </script>
+  <script src="./data-public-anon-v5-en.js?v=5.0.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="./app-public-anon-v5-en.js?v=5.0.0" defer></script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <img class="brand-logo mate-brand-logo" src="./mate_logo.png" alt="MATE logo">
+        <div class="brand-text">
+          <div class="brand">ZeroWaste Entry – Institutional Catering</div><div class="small-muted"> demonstration version</div>
+        </div>
+      </div>
+      <div class="status-wrap">
+        <span id="networkBadge" class="badge neutral">...</span>
+        <button id="installBtn" class="icon-btn hidden" type="button" aria-label="Install">＋</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- DATA ENTRY -->
+      <section id="view-entry" class="view active">
+        <div class="progress-card">
+          <div class="progress-header">
+            <strong id="stepTitle">1. Basic details</strong>
+            <span id="stepCounter">1 / 6</span>
+          </div>
+          <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        </div>
+
+        <div id="observationIntro" class="hero-card observation-intro">
+          <div>
+            <div class="hero-text hero-text-strong">Complete the plate-waste observation form below. Record data separately for each institution and age group.</div>
+            <div class="course-focus" aria-label="Dish types to record">
+              <div><span class="course-focus-number">1</span><strong>SOUP</strong><small>quantity, waste, temperature, sensory evaluation</small></div>
+              <div><span class="course-focus-number">2</span><strong>MAIN COURSE</strong><small>quantity, waste, components, temperature, sensory evaluation</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="stepValidation" class="validation-strip"></div>
+
+        <form id="entryForm" novalidate>
+          <!-- STEP 1 -->
+          <section class="step active" data-step="0">
+            <div class="card">
+              <h2>Meal event</h2>
+
+              <label class="field">
+                <span>Recorder ID <b>*</b></span>
+                <input id="recorderName" type="text" autocomplete="off" placeholder="e.g. Recorder_01" required>
+                <small class="small-muted">Use a coded identifier, rather than a personal name, in the public version.</small>
+              </label>
+
+              <label class="field">
+                <span>Date <b>*</b></span>
+                <input id="mealDate" type="date" required>
+              </label>
+
+              <label class="field">
+                <span>Age group <b>*</b></span>
+                <select id="ageGroup" required>
+                  <option value="">Select age group…</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Institution <b>*</b></span>
+                <select id="institution" required>
+                  <option value="">Select institution…</option>
+                </select>
+              </label>
+
+              <div id="ageGuideBox" class="info-box muted">
+                The corresponding regulatory portion-size age group will appear after selection.
+              </div>
+
+              <div class="note">
+                The exact submission date and time are recorded automatically.
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 2 -->
+          <section class="step" data-step="1">
+            <div class="card">
+              <div class="section-kicker">SOUP</div>
+              <h2>Quantities and waste</h2>
+
+              <label class="field">
+                <span>Dish name <b>*</b></span>
+                <input id="soupDish" list="soupDishList" autocomplete="off" placeholder="Start typing…" required>
+                <datalist id="soupDishList"></datalist>
+              </label>
+              <div class="inline-actions">
+                <button id="soupNewDishBtn" class="secondary-btn small" type="button">Other / new dish</button>
+                <span id="soupDishStatus" class="small-muted"></span>
+              </div>
+
+              <div class="field-grid two">
+                <label class="field">
+                  <span>Served quantity <b>*</b></span>
+                  <input id="soupServed" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Unit <b>*</b></span>
+                  <select id="soupServedUnit" required>
+                    <option value="liter">litres</option>
+                    <option value="kg">kg</option>
+                    <option value="darab">pieces</option>
+                    <option value="adag">portions</option>
+                  </select>
+                </label>
+              </div>
+              <div id="soupServedExtra"></div>
+              <div id="soupServedPreview" class="conversion-box"></div>
+
+              <div class="slider-block">
+                <div class="slider-head">
+                  <label for="soupTemp" class="temperature-label">Serving temperature <b>*</b></label>
+                  <strong id="soupTempValue">65 °C</strong>
+                </div>
+                <input id="soupTemp" type="range" min="0" max="100" step="1" value="65">
+                <div id="soupTempStatus" class="temp-status warn">63–68 °C – reheating may soon be required</div>
+              </div>
+
+              <h3>Plate waste</h3>
+              <div class="field-grid two">
+                <label class="field">
+                  <span>Total waste <b>*</b></span>
+                  <input id="soupWaste" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Unit <b>*</b></span>
+                  <select id="soupWasteUnit" required>
+                    <option value="kg">kg</option>
+                    <option value="liter">litres</option>
+                    <option value="darab">pieces</option>
+                    <option value="adag">portions</option>
+                  </select>
+                </label>
+              </div>
+              <div id="soupWasteExtra"></div>
+              <div id="soupWastePreview" class="conversion-box"></div>
+            </div>
+          </section>
+
+          <!-- STEP 3 -->
+          <section class="step" data-step="2">
+            <div class="card">
+              <div class="section-kicker">SOUP</div>
+              <h2>Sensory evaluation</h2>
+              <div class="sensory-instruction"><strong>Sensory evaluation – CATA:</strong> First assign a score from 1 to 5, then <strong>select from the list first</strong> all descriptors that characterise the dish, adding each with the <strong>“Add”</strong> button. Only if a required descriptor is missing, use <strong>“Other descriptor”</strong> and add your own descriptor. A <strong>“Appropriate”</strong> descriptor may only be selected for a <strong>5-point</strong> rating. <strong>For scores 1–4, select only negative or defect-related descriptors.</strong></div>
+              <div id="soupSensory"></div>
+
+              <div class="photo-card">
+                <label class="field">
+                  <span>Photo of the served soup</span>
+                  <input id="soupPhoto" type="file" accept="image/*" capture="environment">
+                </label>
+                <div id="soupPhotoPreview" class="photo-preview muted">No photo selected.</div>
+              </div>
+
+              <label class="field">
+                <span>Suggested improvement <b>*</b></span>
+                <textarea id="soupImprovement" rows="3" placeholder="If none, write: No improvement suggested" required></textarea>
+              </label>
+              <label class="field">
+                <span>Comments <b>*</b></span>
+                <textarea id="soupNote" rows="4" placeholder="For example, preparation difficulties, unusual events or missing components.&#10;If none, write: No comments" required></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- STEP 4 -->
+          <section class="step" data-step="3">
+            <div class="card">
+              <div class="section-kicker">MAIN COURSE</div>
+              <h2>Quantities and waste</h2>
+
+              <label class="field">
+                <span>Dish name <b>*</b></span>
+                <input id="mainDish" list="mainDishList" autocomplete="off" placeholder="Start typing…" required>
+                <datalist id="mainDishList"></datalist>
+              </label>
+              <div class="inline-actions">
+                <button id="mainNewDishBtn" class="secondary-btn small" type="button">Other / new dish</button>
+                <span id="mainDishStatus" class="small-muted"></span>
+              </div>
+              <div class="field-grid two">
+                <label class="field">
+                  <span>Served quantity <b>*</b></span>
+                  <input id="mainServed" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Unit <b>*</b></span>
+                  <select id="mainServedUnit" required>
+                    <option value="kg">kg</option>
+                    <option value="liter">litres</option>
+                    <option value="darab">pieces</option>
+                    <option value="adag">portions</option>
+                  </select>
+                </label>
+              </div>
+              <div id="mainServedExtra"></div>
+              <div id="mainServedPreview" class="conversion-box"></div>
+
+              <div class="slider-block">
+                <div class="slider-head">
+                  <label for="mainTemp" class="temperature-label">Main dish / main-component temperature <b>*</b></label>
+                  <strong id="mainTempValue">65 °C</strong>
+                </div>
+                <input id="mainTemp" type="range" min="0" max="100" step="1" value="65">
+                <div id="mainTempStatus" class="temp-status warn">63–68 °C – reheating may soon be required</div>
+              </div>
+
+              <div class="slider-block">
+                <div class="slider-head">
+                  <label for="mainSideTemp" class="temperature-label">Side-dish temperature <b>*</b></label>
+                  <strong id="mainSideTempValue">65 °C</strong>
+                </div>
+                <input id="mainSideTemp" type="range" min="0" max="100" step="1" value="65">
+                <div id="mainSideTempStatus" class="temp-status warn">63–68 °C – reheating may soon be required</div>
+              </div>
+
+              <h3>Plate waste</h3>
+              <label class="field">
+                <span>Waste unit <b>*</b></span>
+                <select id="mainWasteUnit" required>
+                  <option value="kg">kg</option>
+                  <option value="liter">litres</option>
+                  <option value="darab">pieces</option>
+                  <option value="adag">portions</option>
+                </select>
+              </label>
+              <div class="field-grid two">
+                <label class="field">
+                  <span>Total waste <b>*</b></span>
+                  <input id="mainWaste" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Meat / main-component waste <b>*</b></span>
+                  <input id="mainWastePrimary" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Side-dish waste <b>*</b></span>
+                  <input id="mainWasteSide" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+                <label class="field">
+                  <span>Other-component waste <b>*</b></span>
+                  <input id="mainWasteOther" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 12.5" required>
+                </label>
+              </div>
+              <div id="mainWasteExtra"></div>
+              <div id="mainWastePreview" class="conversion-box"></div>
+            </div>
+          </section>
+
+          <!-- STEP 5 -->
+          <section class="step" data-step="4">
+            <div class="card">
+              <div class="section-kicker">MAIN COURSE</div>
+              <h2>Sensory evaluation</h2>
+              <div class="sensory-instruction"><strong>Sensory evaluation – CATA:</strong> First assign a score from 1 to 5, then <strong>select from the list first</strong> all descriptors that characterise the dish, adding each with the <strong>“Add”</strong> button. Only if a required descriptor is missing, use <strong>“Other descriptor”</strong> and add your own descriptor. A <strong>“Appropriate”</strong> descriptor may only be selected for a <strong>5-point</strong> rating. <strong>For scores 1–4, select only negative or defect-related descriptors.</strong></div>
+              <div id="mainSensory"></div>
+
+              <div class="photo-card">
+                <label class="field">
+                  <span>Photo of the served main course</span>
+                  <input id="mainPhoto" type="file" accept="image/*" capture="environment">
+                </label>
+                <div id="mainPhotoPreview" class="photo-preview muted">No photo selected.</div>
+              </div>
+
+              <label class="field">
+                <span>Suggested improvement <b>*</b></span>
+                <textarea id="mainImprovement" rows="3" placeholder="If none, write: No improvement suggested" required></textarea>
+              </label>
+              <label class="field">
+                <span>Comments <b>*</b></span>
+                <textarea id="mainNote" rows="4" placeholder="For example, preparation difficulties, unusual events or missing components.&#10;If none, write: No comments" required></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- STEP 6 -->
+          <section class="step" data-step="5">
+            <div class="card">
+              <h2>Review and submit</h2>
+              <div id="reviewContent"></div>
+              <div id="finalValidation" class="validation-box"></div>
+              <button id="submitBtn" class="primary-btn large" type="button" disabled>
+                SAVE MEASUREMENT
+              </button>
+            </div>
+          </section>
+        </form>
+
+        <div class="wizard-actions">
+          <button id="prevBtn" class="secondary-btn" type="button">Back</button>
+          <button id="nextBtn" class="primary-btn" type="button">Next</button>
+        </div>
+      </section>
+
+      <!-- SAVED RECORDS -->
+      <section id="view-saved" class="view">
+        <div class="card">
+          <div class="card-head-row">
+            <div>
+              <h2>Saved records</h2>
+              <p class="muted">Records are stored locally in your browser on this device.</p>
+            </div>
+            <span id="savedCount" class="count-pill">0</span>
+          </div>
+          <div class="record-actions" style="margin: 0 0 1rem 0;">
+            <button id="deleteLatestSavedBtn" class="secondary-btn" type="button">Delete latest record</button>
+          </div>
+          <div id="savedList" class="record-list"></div>
+        </div>
+      </section>
+
+      <!-- DATA EXPORT -->
+      <section id="view-export" class="view">
+        <div class="card">
+          <h2>Export data</h2>
+          <div class="field-grid two">
+            <label class="field">
+              <span>Start date</span>
+              <input id="exportFrom" type="date">
+            </label>
+            <label class="field">
+              <span>End date</span>
+              <input id="exportTo" type="date">
+            </label>
+          </div>
+          <label class="field">
+            <span>Institution</span>
+            <select id="exportInstitution">
+              <option value="">All institutions</option>
+            </select>
+          </label>
+          <div id="exportCount" class="info-box">0 records available for export</div>
+          <div class="button-stack">
+            <button id="exportZipBtn" class="primary-btn" type="button">Download ZIP package for the catering manager</button>
+            <button id="exportXlsxBtn" class="secondary-btn" type="button">Download XLSX data</button>
+            <button id="exportCsvBtn" class="secondary-btn" type="button">Download CSV data</button>
+            <button id="backupJsonBtn" class="secondary-btn" type="button">Local backup (JSON)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- REFERENCE DATA -->
+      <section id="view-master" class="view">
+        <div class="card">
+          <h2>Institution reference list</h2>
+          <label class="field">
+            <span>New anonymised institution ID</span>
+            <input id="newInstitution" type="text" placeholder="e.g. Primary_school_04">
+          </label>
+          <button id="addInstitutionBtn" class="primary-btn" type="button">Add institution</button>
+          <div id="institutionList" class="simple-list"></div>
+        </div>
+
+        <div class="card">
+          <h2>Portion-size guide</h2>
+          <label class="field">
+            <span>Search</span>
+            <input id="guideSearch" type="search" placeholder="e.g. soup, potatoes, ragout…">
+          </label>
+          <div id="guideList" class="simple-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-view="entry" type="button"><span>✎</span><small>Entry</small></button>
+      <button class="nav-btn" data-view="saved" type="button"><span>▤</span><small>Saved</small></button>
+      <button class="nav-btn" data-view="export" type="button"><span>⇩</span><small>Export</small></button>
+      <button class="nav-btn" data-view="master" type="button"><span>⚙</span><small>Reference data</small></button>
+    </nav>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+  </div>
+</body>
+</html>
